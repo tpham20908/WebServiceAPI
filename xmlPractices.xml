@@ -1,0 +1,75 @@
+<methodCall><methodName>jac.arraysOfStructs</methodName>
+<params>
+  <param>
+    <value>
+      <array>
+        <data>
+          <value>
+            <struct>
+              <member>
+                <name>moe</name>
+                <value><int>4</int></value>
+              </member>
+              <member>
+                <name>curly</name>
+                <value><int>14</int></value>
+              </member>
+            </struct>
+          </value>
+          <value>
+            <struct>
+              <member>
+                <name>curly</name>
+                <value><int>12</int></value>
+              </member>
+              <member>
+                <name>larry</name>
+                <value><int>22</int></value>
+              </member>
+            </struct>
+          </value>
+        </data>
+      </array>
+    </value>
+  </param>
+</params>
+</methodCall>
+
+<!-- 
+<struct>
+        <member>
+          <name>Id</name>
+          <value><int>109</int></value>
+        </member>
+        <member>
+          <name>Name</name>
+          <value><string>John Doe</string></value> 
+        </member>
+        <member>
+          <name>City</name>
+          <value><string>Montreal</string></value> 
+        </member>
+        <member>
+          <name>Salary</name>
+          <value><double>65000.85</double></value> 
+        </member>
+        <member>
+          <name>Salary</name>
+          <value>
+            <struct>
+              <member>
+                <name>Quarter 1</name>
+                <value><double>13500</double></value>
+              </member>
+              <member>
+                <name>Quarter 2</name>
+                <value><double>15500</double></value>
+              </member>
+              <member>
+                <name>Quarter 3</name>
+                <value><double>21500</double></value>
+              </member>
+            </struct>
+          </value> 
+        </member>
+      </struct> -->

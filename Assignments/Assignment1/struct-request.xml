@@ -1,4 +1,22 @@
-<methodCall><methodName>jac.getStateName</methodName>
+<methodCall><methodName>jac.struct</methodName>
 <params>
+  <param>
+    <value>
+      <struct>
+        <member>
+          <name>moe</name>
+          <value><i4>21</i4></value>
+        </member>
+        <member>
+          <name>larry</name>
+          <value><i4>10</i4></value>
+        </member>
+        <member>
+          <name>curly</name>
+          <value><i4>65</i4></value>
+        </member>
+      </struct>
+    </value>
+  </param>
 </params>
 </methodCall>

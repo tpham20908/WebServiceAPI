@@ -1,0 +1,10 @@
+<methodCall><methodName>jac.addTwo</methodName>
+<params>
+  <param>
+    <value><int>6137</int></value>
+  </param>
+  <param>
+    <value><int>2018</int></value>
+  </param>
+</params>
+</methodCall>

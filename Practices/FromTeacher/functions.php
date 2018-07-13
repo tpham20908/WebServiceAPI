@@ -13,22 +13,21 @@ function create_links($arg=""){
 
 //handles responses
 function response($data, $status=200){
-  if (isset($_GET["format"])) {
-    if ($_GET["format"] == "xml") {
-      response_as_xml();
-    } elseif ($_GET["format"] == "json") {
-      response_as_json();
-    } else {
-      $link = $data["link"];
-      response_as_json(
-        array("Error"=>"Unknown format", "link"=>$link),
-        400
-      );
+  if (isset($_GET['format'])){
+    if ($_GET['format'] == "xml")
+      respond_as_xml($data, $status);
+    elseif ($_GET['format'] == "json")
+      respond_as_json($data, $status);
+    else {
+      $links = isset($data['Links']) ? $data['Links'] : array();
+      respond_as_json(array("Error"=>"Unknown Format", "Links"=>$links),400);
     }
+  }else{
+    respond_as_json($data, $status);
   }
 }
-
-function response_as_json($data, $status) {
+//returns response as json
+function respond_as_json($data, $status){
   header("Content-Type:application/json");
   header("HTTP/1.1 " .$status);
   echo json_encode($data);

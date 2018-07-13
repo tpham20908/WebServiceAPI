@@ -3,6 +3,7 @@
 require_once("functions.php");
     // check for GET method
     if ($_SERVER["REQUEST_METHOD"] == "GET") {
+        $format = "json";
 
         // $people = ["John", "Peter", "Smith", "Alan", "Sylvie"];
         $people = [
@@ -20,9 +21,13 @@ require_once("functions.php");
             foreach ($people as $item) {
                 if ($_GET["id"] == $item["id"]) {
                     $user_found = true;
-                    response(
-                        ["Person"=>$item, "link"=>create_links($_GET["id"])]
-                    );
+
+                    if (isset($_GET["format"])) {
+                        $format = $_GET["format"];
+                        response(
+                            ["Person"=>$item, "link"=>create_links($_GET["id"])], 200, $format
+                        );
+                    } 
                 }
             } // end foreach
 
@@ -32,25 +37,24 @@ require_once("functions.php");
                         "Error"=>"User was not found",
                         "link"=>create_links($_GET["id"])
                     ),
-                    400
+                    400,
+                    "json"
                 );
             }
             
         } else {
-            $peopleWithLinks = ["people"=>$people, "link"=>create_links()];
-            response(["people"=>$peopleWithLinks, "link"=>create_links()], 200);
+            response(["people"=>$people, "link"=>create_links()], 200, $format);
         }
-
         
-        
-        // $json_people = json_encode($peopleWithLinks);
-
-        // header("Content-Type: application/json");
-
-        // echo $json_people;
-
     } else {
         // not GET, return error
-        echo "<h2>ERROR</h2>";
+        response(
+            array(
+                "Error"=>"Message not found",
+                "Link"=>create_links()
+            ),
+            405,
+            $format
+        );
     }
 ?>

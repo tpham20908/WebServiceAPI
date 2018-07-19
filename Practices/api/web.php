@@ -3,9 +3,6 @@
 require_once("functions.php");
     // check for GET method
     if ($_SERVER["REQUEST_METHOD"] == "GET") {
-        $format = "json";
-
-        // $people = ["John", "Peter", "Smith", "Alan", "Sylvie"];
         $people = [
             ["id"=>101, "name"=> "John", "city"=>"Toronto"],
             ["id"=>102, "name"=> "Peter", "city"=>"Calgary"],
@@ -16,18 +13,16 @@ require_once("functions.php");
 
         // if a user requested
         if (isset($_GET["id"])) {
-            $user_found = false;
             // return information about user
+            $user_found = false;
+
             foreach ($people as $item) {
                 if ($_GET["id"] == $item["id"]) {
                     $user_found = true;
 
-                    if (isset($_GET["format"])) {
-                        $format = $_GET["format"];
-                        response(
-                            ["Person"=>$item, "link"=>create_links($_GET["id"])], 200, $format
-                        );
-                    } 
+                    response(
+                        ["Person"=>$item, "link"=>create_links($_GET["id"])]
+                    );
                 }
             } // end foreach
 
@@ -37,13 +32,12 @@ require_once("functions.php");
                         "Error"=>"User was not found",
                         "link"=>create_links($_GET["id"])
                     ),
-                    400,
-                    "json"
+                    400
                 );
             }
             
         } else {
-            response(["people"=>$people, "link"=>create_links()], 200, $format);
+            response(["people"=>$people, "link"=>create_links()]);
         }
         
     } else {
@@ -53,8 +47,7 @@ require_once("functions.php");
                 "Error"=>"Message not found",
                 "Link"=>create_links()
             ),
-            405,
-            $format
+            405
         );
     }
 ?>

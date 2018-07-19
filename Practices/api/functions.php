@@ -13,23 +13,37 @@ function create_links($arg="") {
 }
 
 // response
-function response($data, $status = 200, $format) {
-    if ($format == "json") {
-        // json format
-        header("Content-Type: application/json");
-        header("HTTP/1.1 " . $status);
-        echo json_encode($data);
-    } else if ($format == "xml") {
-        // xml format
-        header("Content-Type: application/xml");
-        $xml_data = new SimpleXMLElement("<?xml version='1.0'?><data></data>");
-        array_to_xml($data, $xml_data);
-        print $xml_data->asXML();
+function response($data, $status=200){
+    if (isset($_GET["format"])) {
+        if ($_GET["format"] == "xml") {
+            response_as_xml($data, $status);
+        } elseif ($_GET["format"] == "json") {
+            response_as_json($data, $status);
+        } else {
+            $link = $data["link"];
+            response_as_json(
+            array("Error"=>"Unknown format", "link"=>$link),
+            400
+            );
+        }
     } else {
-
+        response_as_json($data, $status);
     }
 }
+  
+function response_as_json($data, $status) {
+    header("Content-Type:application/json");
+    header("HTTP/1.1 " .$status);
+    echo json_encode($data);
+}
 
+function response_as_xml($data, $status) {
+    header("Content-Type: application/xml");
+    $xml_data = new SimpleXMLElement("<?xml version='1.0'?><data></data>");
+    array_to_xml($data, $xml_data);
+    print $xml_data->asXML();
+}
+  
 function array_to_xml($data, &$xml_data) {
     // https://stackoverflow.com/a/5965940
     foreach ($data as $key => $value) {
@@ -44,36 +58,5 @@ function array_to_xml($data, &$xml_data) {
         }
     }
 }
-
-/*
-function response($data, $status=200){
-  if (isset($_GET["format"])) {
-    if ($_GET["format"] == "xml") {
-      response_as_xml();
-    } elseif ($_GET["format"] == "json") {
-      response_as_json();
-    } else {
-      $link = $data["link"];
-      response_as_json(
-        array("Error"=>"Unknown format", "link"=>$link),
-        400
-      );
-    }
-  }
-}
-
-function response_as_json($data, $status) {
-  header("Content-Type:application/json");
-  header("HTTP/1.1 " .$status);
-  echo json_encode($data);
-}
-
-function response_as_xml($data, $status) {
-  header("Content-Type: application/xml");
-  $xml_data = new SimpleXMLElement("<?xml version='1.0'?><data></data>");
-  array_to_xml($data, $xml_data);
-  print $xml_data->asXML();
-}
-*/
 
 ?>

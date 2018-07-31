@@ -1,0 +1,14 @@
+<?xml version="1.0" ?>
+<soap:Envelope
+    xmlns:soap="http://www.w3.org/2003/05/soap-envelope"
+    soap:encodingStyle="http://w3.org/2003/05/soap-encoding">
+
+    <!-- omitted header element -->
+    
+    <soap:Body xmlns:xs="http://www.mockresources.io">
+        <!-- response -->
+        <xs:returnKevin>
+            <xs:Kevin>305.15</xs:Kevin>
+        </xs:returnKevin>
+    </soap:Body>
+</soap:Envelope>

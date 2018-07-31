@@ -1,0 +1,33 @@
+<?xml version="1.0" ?>
+<soap:Envelop 
+    xmlns:soap="http://www.w3.org/2003/05/soap-envelope"
+    soap:encodingStyle="http://w3.org/2003/05/soap-encoding">
+
+    <!-- omitted header element -->
+    <soap:Body xmlns:xs="#">
+        <!-- sample request #1 -->
+        <xs:getStockPrice>
+            <!-- parameter(s) -->
+            <xs:stockName>APPLE</xs:stockName>
+        </xs:getStockPrice>
+        
+        <!-- sample request #2 -->
+        <xs:getStockPrice>FBOOK</xs:getStockPrice>
+        
+        <!-- sample request #3 -->
+        <xs:callSomething>
+            <xs:function>getStockPrice</xs:function>
+            <xs:parameter>YAHOO</xs:parameter>
+        </xs:callSomething>
+
+        <!-- Seperate file for response -->
+
+        <!-- sample response #1 -->
+        <xs:putStockPrice>
+            <xs:price>205.68</xs:price>
+        </xs:putStockPrice>
+
+        <!-- sample response 2 -->
+        <xs:stockPriceResponse>21.55</xs:stockPriceResponse>
+    </soap:Body>
+</soap:Envelop>
